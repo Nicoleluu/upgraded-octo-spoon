@@ -1,0 +1,67 @@
+/* reset the default spacing on everything */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* make the page fill the whole window and give it a dark background */
+html,
+body {
+  height: 100%;
+  background-color: #141414;
+}
+
+/* center the stuff in the middle of the page */
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* put the input and button side by side */
+form {
+  display: flex;
+}
+
+/* the search box where you type the zipcode */
+input[type="text"] {
+  width: 100%;
+  height: 40px;
+  border: none;
+  text-align: center;
+}
+
+/* the grey placeholder text color */
+input::placeholder {
+  color: #141414;
+}
+
+/* the search button next to the input */
+.search-button {
+  color: #f4f4f4;
+  background-color: #141414;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border: 1px solid #f4f4f4;
+}
+
+/* where the weather answer shows up */
+.output_component {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* make the city name and temperature big and white */
+.city_name, .temperature {
+  text-align: center;
+  font-size: 3em;
+  line-height: 1.2em;
+  color: white;
+}
