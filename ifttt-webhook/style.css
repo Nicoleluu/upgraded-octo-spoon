@@ -1,0 +1,14 @@
+/* take away the default white border around the page */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* center the canvas on a dark page */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #111;
+}
