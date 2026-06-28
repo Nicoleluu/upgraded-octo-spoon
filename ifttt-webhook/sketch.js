@@ -1,15 +1,16 @@
 // Webhooks assignment - by Nicole
-// this connects my P5 sketch to IFTTT with a webhook.
-// pressing the UP arrow turns my smart plug ON, DOWN turns it OFF.
-// my "new way": i also drew a lightbulb that i can CLICK to toggle the lamp,
-// and the whole canvas glows so i can see the light state on screen.
+// this connects my P5 sketch to a webhook so my sketch can talk to the web.
+// pressing the UP arrow tells the webhook my smart lamp is ON, DOWN says OFF.
+//
+// NOTE: IFTTT webhooks now need a paid Pro plan, so i used Pipedream instead
+// (free). it is the same idea as the tutorial: P5 sends an http request to a
+// webhook URL, and the webhook runs an action (it emails me).
+//
+// my "new way": i also drew a lightbulb i can CLICK to toggle the lamp, and
+// the whole canvas glows so i can see the light state on screen.
 
-// my secret webhooks key comes from config.js (not uploaded to github)
-let apiKey = config.IFTTT_KEY;
-
-// these are the two event names i made in IFTTT
-let eventOn = "turn_on";
-let eventOff = "turn_off";
+// my secret webhook URL comes from config.js (not uploaded to github)
+let webhookURL = config.WEBHOOK_URL;
 
 // this remembers if the lamp is on, so the screen can show it
 let lightOn = false;
@@ -64,7 +65,7 @@ function keyPressed() {
   }
 }
 
-// my "new way" - clicking the mouse also controls the real lamp
+// my "new way" - clicking the mouse also controls the lamp
 function mousePressed() {
   if (lightOn === true) {
     turnOff();
@@ -73,16 +74,17 @@ function mousePressed() {
   }
 }
 
-// send the webhook that turns the plug ON
+// send the webhook request that means "lamp on".
+// i add ?state=on to the end so my webhook knows which thing happened.
 function turnOn() {
-  httpGet("https://maker.ifttt.com/trigger/" + eventOn + "/with/key/" + apiKey);
+  httpGet(webhookURL + "?state=on");
   lightOn = true;
-  print("sent turn_on to IFTTT"); // so i can check it in the console
+  print("sent state=on to my webhook"); // so i can check it in the console
 }
 
-// send the webhook that turns the plug OFF
+// send the webhook request that means "lamp off"
 function turnOff() {
-  httpGet("https://maker.ifttt.com/trigger/" + eventOff + "/with/key/" + apiKey);
+  httpGet(webhookURL + "?state=off");
   lightOn = false;
-  print("sent turn_off to IFTTT");
+  print("sent state=off to my webhook");
 }
